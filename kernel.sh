@@ -48,24 +48,24 @@ KERNEL_DIR="$(pwd)"
 BASEDIR="$(basename "$KERNEL_DIR")"
 
 # The name of the Kernel, to name the ZIP
-ZIPNAME="azure"
+ZIPNAME="m03l"
 
 # Build Author
 # Take care, it should be a universal and most probably, case-sensitive
-AUTHOR="Panchajanya1999"
+AUTHOR="MuhamadKhapi"
 
 # Architecture
 ARCH=arm64
 
 # The name of the device for which the kernel is built
-MODEL="Redmi Note 7 Pro"
+MODEL="Poco X3 Pro"
 
 # The codename of the device
-DEVICE="violet"
+DEVICE="vayu"
 
 # The defconfig which should be used. Get it from config.gz from
 # your device or check source
-DEFCONFIG=vendor/violet-perf_defconfig
+DEFCONFIG=vendor/vayu-perf_defconfig
 
 # Specify compiler. 
 # 'clang' or 'gcc'
@@ -86,7 +86,7 @@ PTTG=1
 if [ $PTTG = 1 ]
 then
 	# Set Telegram Chat ID
-	CHATID="-1001231303646"
+	CHATID="-1001978051913"
 fi
 
 # Generate a full DEFCONFIG prior building. 1 is YES | 0 is NO(default)
@@ -102,7 +102,7 @@ if [ $BUILD_DTBO = 1 ]
 then 
 	# Set this to your dtbo path. 
 	# Defaults in folder out/arch/arm64/boot/dts
-	DTBO_PATH="xiaomi/violet-sm6150-overlay.dtbo"
+	DTBO_PATH="xiaomi/vayu-sm8150-overlay.dtbo"
 fi
 
 # Sign the zipfile
@@ -174,7 +174,7 @@ KERVER=$(make kernelversion)
 COMMIT_HEAD=$(git log --oneline -1)
 
 # Set Date 
-DATE=$(TZ=Asia/Kolkata date +"%Y%m%d-%T")
+DATE=$(TZ=Asia/Jakarta date +"%Y%m%d-%T")
 
 #Now Its time for other stuffs like cloning, exporting, etc
 
@@ -184,8 +184,8 @@ DATE=$(TZ=Asia/Kolkata date +"%Y%m%d-%T")
 	if [ $COMPILER = "gcc" ]
 	then
 		msger -n "|| Cloning GCC 9.3.0 baremetal ||"
-		git clone --depth=1 https://github.com/mvaisakh/gcc-arm64.git gcc64
-		git clone --depth=1 https://github.com/arter97/arm32-gcc.git gcc32
+		git clone --depth=1 https://github.com/greenforce-project/gcc-arm64.git gcc64
+		git clone --depth=1 https://github.com/greenforce-project/gcc-arm.git gcc32
 		GCC64_DIR=$KERNEL_DIR/gcc64
 		GCC32_DIR=$KERNEL_DIR/gcc32
 	fi
@@ -193,7 +193,9 @@ DATE=$(TZ=Asia/Kolkata date +"%Y%m%d-%T")
 	if [ $COMPILER = "clang" ]
 	then
 		msger -n "|| Cloning Clang-16||"
-		git clone --depth=1 https://gitlab.com/Panchajanya1999/azure-clang.git clang-llvm
+		wget https://github.com/ZyCromerZ/Clang/releases/download/17.0.0-20230713-release/Clang-17.0.0-20230713.tar.gz -O clang-llvm-17.tar.gz
+	  mkdir clang-llvm
+	  tar -xvzf clang-llvm-17.tar.gz -C clang-llvm
 		# Toolchain Directory defaults to clang-llvm
 		TC_DIR=$KERNEL_DIR/clang-llvm
 	fi
@@ -225,8 +227,8 @@ exports()
 		PATH=$GCC64_DIR/bin/:$GCC32_DIR/bin/:/usr/bin:$PATH
 	fi
 
-	BOT_MSG_URL="https://api.telegram.org/bot$token/sendMessage"
-	BOT_BUILD_URL="https://api.telegram.org/bot$token/sendDocument"
+	BOT_MSG_URL="https://api.telegram.org/bot6043289271:AAGlPVBCS-1ED0FCi3Dr21tVcPr_axSYXV4/sendMessage"
+	BOT_BUILD_URL="https://api.telegram.org/bot6043289271:AAGlPVBCS-1ED0FCi3Dr21tVcPr_axSYXV4/sendDocument"
 	PROCS=$(nproc --all)
 
 	export KBUILD_BUILD_USER ARCH SUBARCH PATH \
