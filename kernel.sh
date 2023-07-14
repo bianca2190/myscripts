@@ -193,9 +193,7 @@ DATE=$(TZ=Asia/Jakarta date +"%Y%m%d-%T")
 	if [ $COMPILER = "clang" ]
 	then
 		msger -n "|| Cloning Clang-16||"
-		wget https://github.com/ZyCromerZ/Clang/releases/download/17.0.0-20230713-release/Clang-17.0.0-20230713.tar.gz -O clang-llvm-17.tar.gz
-	        mkdir clang-llvm
-	        tar -xvzf clang-llvm-17.tar.gz -C clang-llvm
+		git clone --depth=1 https://gitlab.com/Panchajanya1999/azure-clang.git clang-llvm
 		# Toolchain Directory defaults to clang-llvm
 		TC_DIR=$KERNEL_DIR/clang-llvm
 	fi
