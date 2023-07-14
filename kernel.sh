@@ -52,7 +52,7 @@ ZIPNAME="m03l"
 
 # Build Author
 # Take care, it should be a universal and most probably, case-sensitive
-AUTHOR="MuhamadKhapi"
+AUTHOR="bianca2190"
 
 # Architecture
 ARCH=arm64
